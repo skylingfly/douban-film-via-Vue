@@ -13,16 +13,16 @@
       <nav class="nav" menu-active>
         <ul>
           <!--li中添加 active 类样式，显示焦点状态。-->
-          <li :class="{active:$route.path.startsWith('/home_page')}" @click.prevent='path="/"'>
+          <li :class="{active:path.startsWith('/home_page')}" >
             <router-link to="/home_page">首页</router-link>
           </li>
-          <li :class="{active:$route.path.startsWith('/in_theaters')}" @click.prevent='path="/in_theaters"'>
+          <li :class="{active:path.startsWith('/in_theaters')}" >
             <router-link to="/in_theaters">正在热映</router-link>
           </li>
-          <li :class="{active:$route.path.startsWith('/coming_soon')}" @click.prevent='path="/coming_soon"'>
+          <li :class="{active:path.startsWith('/coming_soon')}">
             <router-link to="/coming_soon">即将上映</router-link>
           </li>
-          <li :class="{active:$route.path.startsWith('/top250')}" @click.prevent='path="/top250"'>
+          <li :class="{active:path.startsWith('/top250')}">
             <router-link to="/top250">Top250</router-link>
           </li>
         </ul>
@@ -50,13 +50,12 @@ export default {
   data(){
     return{
       searchtxt:'',
-      path:'/'
     }
    },
-   watch:{
-     $route:function () { 
-       this.path = '/'+this.$route.path.split('/')[1];
-      }
+   computed:{
+     path(){
+       return this.$route.path
+     }
    },
   methods:{
     search(){
